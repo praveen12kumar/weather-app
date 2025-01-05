@@ -7,7 +7,7 @@ import { MdLocationPin } from "react-icons/md";
 function Sidebar() {
   return (
     <div
-      className="basis-3/12 h-full flex flex-col items-center text-white rounded-tl-2xl rounded-bl-2xl pt-8"
+      className="basis-3/12  flex flex-col items-center text-white rounded-tl-2xl rounded-bl-2xl pt-8"
       style={{ background: "rgba(255, 255, 255, 0.81)" }}
     >
       <div className="w-full flex flex-col items-center justify-center px-4">
