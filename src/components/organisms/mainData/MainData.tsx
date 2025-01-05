@@ -8,7 +8,7 @@ function MainData() {
             <TopRow />
             <WeekRow />
 
-            <div className="">
+            <div className="w-full px-12 text-lg font-medium py-4 text-start">
                 Today's HighLights
             </div>
             <HighLightRow />
