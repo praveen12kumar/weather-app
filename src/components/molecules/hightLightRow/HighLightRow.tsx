@@ -8,8 +8,7 @@ function HighLightRow() {
         <HighLightCard title="Wind" footer="km/h" data="20" />
         <HighLightCard title="Wind" footer="km/h" data="20" />
         <HighLightCard title="Wind" footer="km/h" data="20" />
-        <HighLightCard title="Wind" footer="km/h" data="20" />
-
+        
         
         
         </div>
