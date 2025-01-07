@@ -12,6 +12,7 @@ const initialState :ForecastDataState = {
             localTime:""
         },
         dayForecast:[],
+        hourForecast:[],
         currentData:{
             uv:0,
             wind_kmph:0,
@@ -27,7 +28,8 @@ const initialState :ForecastDataState = {
             chance_of_rain:0
         },
     },
-    celcius:true
+    celcius:true,
+    today:true,
 }
 
 export const fetchData = createAsyncThunk('data/fetchData', async (city:string) => {
@@ -47,8 +49,11 @@ const forecastSlice = createSlice({
     name: 'forecast',
     initialState,
     reducers:{
-        toggleCelcius:(state) => {
-            state.celcius = !state.celcius;
+        toggleCelcius:(state, action) => {
+            state.celcius = action.payload
+        },
+        changeTodayOrWeek:(state, action) => {
+            state.today = action.payload
         }
     },
 
@@ -81,7 +86,19 @@ const forecastSlice = createSlice({
                     date: forcastItem.date,
                     avgtemp_c: forcastItem.day.avgtemp_c,
                     avgtemp_f: forcastItem.day.avgtemp_f,
-                    condition: forcastItem.day.condition.text
+                    condition: forcastItem.day.condition.text,
+                    
+                }
+           })
+
+           // setting hour forecast
+           state.data.hourForecast= forecast?.forecastday[0]?.hour?.map((forcastItem: any)=>{
+                return {
+                    time: forcastItem.time,
+                    temp_c: forcastItem.temp_c,
+                    temp_f: forcastItem.temp_f,
+                    condition: forcastItem.condition.text,
+                    icon: forcastItem.condition.icon
                 }
            })
 
@@ -92,7 +109,7 @@ const forecastSlice = createSlice({
        
     }
 })
-export const {toggleCelcius} = forecastSlice.actions 
+export const {toggleCelcius, changeTodayOrWeek} = forecastSlice.actions 
 export default forecastSlice.reducer
 
 

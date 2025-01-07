@@ -10,8 +10,11 @@ function Sidebar() {
 
   const currentData = useSelector((state: ReduxState)=> state.forecast?.data?.currentData);
   const location = useSelector((state:ReduxState)=> state.forecast?.data?.location);
+  const celcius = useSelector((state:ReduxState)=> state.forecast?.celcius);
+  
+  
+  
 
-  //console.log("currentData", currentData);
 
 
   function getDay(){
@@ -35,7 +38,9 @@ function Sidebar() {
 
         <div className="w-full px-4 relative flex flex-col items-start mt-4">
           <div className=" text-7xl text-black text-center">
-            {currentData?.temp_c} <span className="text-4xl absolute top-0 ">°C</span>
+            {
+              celcius ? currentData?.temp_c :(currentData?.temp_f)
+            } <span className="text-4xl absolute top-0 ">{celcius ? "°C" : "°F"}</span>
           </div>
           <div className="text-black text-sm text-center">{getDay()} <span className="ml-2">{location.localTime.split(" ")[0]}</span> </div>
         </div>
