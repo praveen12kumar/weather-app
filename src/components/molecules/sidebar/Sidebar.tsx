@@ -9,7 +9,20 @@ import ReduxState from "../../../interface/ReduxState";
 function Sidebar() {
 
   const currentData = useSelector((state: ReduxState)=> state.forecast?.data?.currentData);
-  console.log("currentData", currentData)
+  const location = useSelector((state:ReduxState)=> state.forecast?.data?.location);
+
+  console.log("currentData", currentData);
+
+
+  function getDay(){
+    const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+    const date = new Date();
+    const day = date.getDay();
+    return days[day];
+  }
+  
+  console.log("location", location);
+  
 
   return (
     <div
@@ -24,7 +37,7 @@ function Sidebar() {
           <div className=" text-7xl text-black text-center">
             {currentData?.temp_c} <span className="text-4xl absolute top-0 ">°C</span>
           </div>
-          <div className="text-black text-sm text-center">Friday, 09:44</div>
+          <div className="text-black text-sm text-center">{getDay()} <span className="ml-2">{location.localTime.split(" ")[0]}</span> </div>
         </div>
       </div>
       <div className="w-full h-[1px] bg-white mt-4"></div>
@@ -48,7 +61,7 @@ function Sidebar() {
         <div className="w-full">
             <div className="w-full flex items-center gap-2">
                 <MdLocationPin className="w-4 h-4"/>
-                <p className="text-sm font-medium">Bengaluru, KA, India</p>
+                <p className="text-sm font-medium">{location?.name}, {location.region}, {location.country}</p>
             </div>
         </div>
       </div>

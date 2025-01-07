@@ -1,16 +1,32 @@
 import MainData from "../components/organisms/mainData/MainData";
 import Sidebar from "../components/molecules/sidebar/Sidebar";
 import background from "../assets/background.jpg"
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useAppDispatch } from "../hooks/hooks";
-import { fetchData } from "../redux/slices/ForecastSlice";
+import { fetchData,  } from "../redux/slices/ForecastSlice";
+import axios from "axios";
+
 function Home(){
 
     const dispatch = useAppDispatch();
 
+    const [city, setCity] = useState<string>("");
+
+
     useEffect(()=>{
-        dispatch(fetchData()); 
-    },[])
+        navigator.geolocation.getCurrentPosition(async(position)=>{
+            const response = await axios.get(`https://us1.locationiq.com/v1/reverse?key=${import.meta.env.VITE_LOCATION_API_KEY}&lat=${position.coords.latitude}&lon=${position.coords.longitude}&format=json`)
+            //console.log("response", response)
+            setCity(response?.data?.address?.county);
+            //console.log("city", city)
+        })
+        if(!city){
+            dispatch(fetchData("New Delhi"));
+        }
+        else{
+            dispatch(fetchData(city)); 
+        }
+    },[city]);
 
 
 

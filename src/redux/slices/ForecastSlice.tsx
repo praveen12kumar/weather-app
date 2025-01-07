@@ -29,10 +29,11 @@ const initialState :ForecastDataState = {
     }
 }
 
-export const fetchData = createAsyncThunk('data/fetchData', async () => {
+export const fetchData = createAsyncThunk('data/fetchData', async (city:string) => {
     try {
-        const response = await axios.get(`/forecast.json?key=${import.meta.env.VITE_API_KEY}&days=7&aqi=yes&q=Bengaluru`,);
-        console.log(response);
+        
+        const response = await axios.get(`/forecast.json?key=${import.meta.env.VITE_API_KEY}&days=7&aqi=yes&q=${city}`,);
+        //console.log(response);
         return response.data;
 
     } catch (error) {
@@ -44,15 +45,13 @@ export const fetchData = createAsyncThunk('data/fetchData', async () => {
 const forecastSlice = createSlice({
     name: 'forecast',
     initialState,
-    reducers:{
-    },
+    reducers:{},
 
     extraReducers:(builder) => {
        builder
        .addCase(fetchData.fulfilled, (state, action) => {
            if(!action.payload) return;
            state.status = "success";
-           console.log("action", action.payload.forecast);
            const {location, current, forecast} = action.payload;
            state.data.location.country = location.country;
            state.data.location.region = location.region;
