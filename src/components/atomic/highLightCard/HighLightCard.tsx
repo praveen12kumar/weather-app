@@ -1,6 +1,6 @@
 type HighLightCardProps = {
     footer: string,
-    data: string,
+    data: string | number,
     title: string
 }
 
@@ -11,7 +11,7 @@ function HighLightCard({footer, data, title}:HighLightCardProps){
             <div className="font-semibold text-md w-full text-left ml-8 mt-2 text-gray-300">
                 {title}
             </div>
-            <div className="text-3xl font-semibold">{data}</div>
+            <div className="text-2xl font-semibold">{data}</div>
             <div className="text-sm w-full text-left ml-8 mb-2">{footer}</div>
         </div>
     )

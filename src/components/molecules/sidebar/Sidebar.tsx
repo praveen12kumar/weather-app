@@ -3,8 +3,14 @@ import Image from "../../atomic/image/Image";
 import { BsDropletFill } from "react-icons/bs";
 import { FaCloud } from "react-icons/fa";
 import { MdLocationPin } from "react-icons/md";
+import { useSelector } from "react-redux";
+import ReduxState from "../../../interface/ReduxState";
 
 function Sidebar() {
+
+  const currentData = useSelector((state: ReduxState)=> state.forecast?.data?.currentData);
+  console.log("currentData", currentData)
+
   return (
     <div
       className="basis-3/12  flex flex-col items-center text-white rounded-tl-2xl rounded-bl-2xl pt-8"
@@ -16,7 +22,7 @@ function Sidebar() {
 
         <div className="w-full px-4 relative flex flex-col items-start mt-4">
           <div className=" text-7xl text-black text-center">
-            25.4 <span className="text-4xl absolute top-0 ">°C</span>
+            {currentData?.temp_c} <span className="text-4xl absolute top-0 ">°C</span>
           </div>
           <div className="text-black text-sm text-center">Friday, 09:44</div>
         </div>
@@ -29,13 +35,13 @@ function Sidebar() {
             <div className="">
               <FaCloud className="" />
             </div>
-            <div className="text-sm font-semibold">Partially Cloudy</div>
+            <div className="text-sm font-semibold">{currentData?.condition}</div>
           </div>
           <div className="w-full flex items-center gap-3 ">
             <div className="">
               <BsDropletFill className="" />
             </div>
-            <div className="text-sm font-semibold">Perc-10%</div>
+            <div className="text-sm font-semibold">Perc-{currentData?.chance_of_rain}%</div>
           </div>
         </div>
         {/* location */}
