@@ -29,7 +29,7 @@ const initialState :ForecastDataState = {
         },
     },
     celcius:true,
-    today:true,
+    today:false,
 }
 
 export const fetchData = createAsyncThunk('data/fetchData', async (city:string) => {
