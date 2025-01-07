@@ -26,14 +26,15 @@ const initialState :ForecastDataState = {
             is_day:false,
             chance_of_rain:0
         },
-    }
+    },
+    celcius:true
 }
 
 export const fetchData = createAsyncThunk('data/fetchData', async (city:string) => {
     try {
-        
+        console.log(city);
         const response = await axios.get(`/forecast.json?key=${import.meta.env.VITE_API_KEY}&days=7&aqi=yes&q=${city}`,);
-        //console.log(response);
+        console.log(response);
         return response.data;
 
     } catch (error) {
@@ -45,7 +46,11 @@ export const fetchData = createAsyncThunk('data/fetchData', async (city:string) 
 const forecastSlice = createSlice({
     name: 'forecast',
     initialState,
-    reducers:{},
+    reducers:{
+        toggleCelcius:(state) => {
+            state.celcius = !state.celcius;
+        }
+    },
 
     extraReducers:(builder) => {
        builder
@@ -87,7 +92,7 @@ const forecastSlice = createSlice({
        
     }
 })
-
+export const {toggleCelcius} = forecastSlice.actions 
 export default forecastSlice.reducer
 
 

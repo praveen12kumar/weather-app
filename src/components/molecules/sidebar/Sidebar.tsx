@@ -11,7 +11,7 @@ function Sidebar() {
   const currentData = useSelector((state: ReduxState)=> state.forecast?.data?.currentData);
   const location = useSelector((state:ReduxState)=> state.forecast?.data?.location);
 
-  console.log("currentData", currentData);
+  //console.log("currentData", currentData);
 
 
   function getDay(){
@@ -21,7 +21,7 @@ function Sidebar() {
     return days[day];
   }
   
-  console.log("location", location);
+  //console.log("location", location);
   
 
   return (

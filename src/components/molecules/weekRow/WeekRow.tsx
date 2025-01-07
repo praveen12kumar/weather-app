@@ -7,7 +7,7 @@ import ReduxState from "../../../interface/ReduxState";
 function WeekRow(){
 
     const dayForecast = useSelector((state:ReduxState)=> state.forecast?.data?.dayForecast);
-    console.log("dayForecast", dayForecast);
+    //console.log("dayForecast", dayForecast);
     
     const weekDays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
