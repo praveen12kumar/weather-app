@@ -20,11 +20,11 @@ function Home(){
             setCity(response?.data?.address?.county);
             //console.log("city", city)
         })
-        // if(!city){
-        //     dispatch(fetchData("New Delhi"));
-        // }
-        {
-            city && dispatch(fetchData(city)); 
+        if(!city){
+            dispatch(fetchData("New Delhi"));
+        }
+        else{
+            dispatch(fetchData(city)); 
         }
     },[city]);
 
